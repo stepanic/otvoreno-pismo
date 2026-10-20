@@ -13,9 +13,15 @@
 - Testovi (`npm run check`): 22 testa u Workers runtimeu — unit (lanac, kanonski JSON jednak verifikatoru, domene, markdown escape) i cijeli tok (organizator, objava i zaključavanje teksta, javni/anonimni potpis, deduplikacija, povlačenje i ponovni potpis, moderacija, CSRF, zatvoreno pismo, append-only trigger, Certilia i ORCID OIDC s lažnim IdP-om, tuđi ključ i istekao token).
 - Ručni prolaz kroz `wrangler dev`: 4 potpisa, `verify-log.mjs` prolazi na živom serveru; stranica pregledana na 1280 px i 390 px (tamna tema), bez horizontalnog scrolla.
 
+## Produkcija (20. 10. 2026.)
+- https://openletter.domovina.ai — Worker `otvoreno-pismo` u Cloudflare računu D.O.M., custom domain; D1 `otvoreno-pismo` (eeur), migracija 0001 primijenjena.
+- Tajne: `HMAC_KEY` (kopija u macOS Keychainu: servis „openletter.domovina.ai HMAC_KEY”; ne mijenjati, inače deduplikacija puca), `RESEND_API_KEY`, `ORGANIZERS`.
+- Mail: Resend, pošiljatelj `openletter@domovina.ai` (domena domovina.ai verificirana u Resendu); login mail provjereno stigao u Gmail.
+- Provjereno: rute 200/303/404, CSP, CSRF 403. Pisma ni potpisi na produkciji još ne postoje.
+
 ## Sljedeće
-1. Deploy instance: domena, D1, `HMAC_KEY`, Resend ili Cloudflare Email Service, Turnstile.
-2. Registrirati ORCID i Certilia aplikacije (redirect URI-ji u README-u) i jednom proći stvarni tok; provjeriti nosi li Certilia `nonce` u id_tokenu.
+1. Turnstile (neobavezno).
+2. Registrirati ORCID i Certilia aplikacije (redirect `https://openletter.domovina.ai/oidc/callback/orcid` i `/certilia`) i jednom proći stvarni tok; provjeriti nosi li Certilia `nonce` u id_tokenu.
 3. Uvesti popis domena javnog sektora (`EXTRA_DOMAINS` ili `src/domains.ts`).
 4. GitHub Action za `scripts/checkpoint.sh` (OTS sidrenje po satu, kao u stadion-maksimir-natjecaj-2026).
 5. Faza 2 (Semaphore) prema `00-plan.md`; prije toga spike `verifyProof` na Workeru.

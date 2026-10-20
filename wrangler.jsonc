@@ -2,25 +2,24 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "otvoreno-pismo",
   "main": "src/index.ts",
+  "account_id": "7dc7167b7e2e00923bfa7cd697df14e4",
+  "routes": [{ "pattern": "openletter.domovina.ai", "custom_domain": true }],
   "compatibility_date": "2026-10-01",
   "observability": { "enabled": true },
   "d1_databases": [
     {
       "binding": "DB",
       "database_name": "otvoreno-pismo",
-      // `npx wrangler d1 create otvoreno-pismo` pa ovdje upiši database_id
-      "database_id": "00000000-0000-0000-0000-000000000000",
+      "database_id": "ced11327-224e-437e-9d29-4943193bbb99",
       "migrations_dir": "migrations"
     }
   ],
   "vars": {
     "SITE_NAME": "Otvoreno pismo",
-    "BASE_URL": "http://localhost:8787",
-    // Zarezom odvojeni e-mailovi koji smiju objavljivati pisma; "*" = otvorena instanca
-    "ORGANIZERS": "",
+    "BASE_URL": "https://openletter.domovina.ai",
     // log | resend
-    "MAIL_MODE": "log",
-    "MAIL_FROM": "Otvoreno pismo <noreply@example.org>",
+    "MAIL_MODE": "resend",
+    "MAIL_FROM": "Otvoreno pismo <openletter@domovina.ai>",
     // https://orcid.org ili https://sandbox.orcid.org
     "ORCID_BASE": "https://orcid.org",
     // https://idp.certilia.com ili https://idp.test.certilia.com
@@ -29,7 +28,8 @@
     // Dodatne domene: "domena=Naziv ustanove;domena2=Naziv"
     "EXTRA_DOMAINS": ""
   }
-  // Tajne (`wrangler secret put`): HMAC_KEY (obavezno), RESEND_API_KEY,
+  // Tajne (`wrangler secret put`): HMAC_KEY (obavezno), ORGANIZERS (zarezom
+  // odvojeni e-mailovi organizatora; "*" = otvorena instanca), RESEND_API_KEY,
   // ORCID_CLIENT_ID, ORCID_CLIENT_SECRET, CERTILIA_CLIENT_ID,
   // CERTILIA_CLIENT_SECRET, TURNSTILE_SECRET
 }

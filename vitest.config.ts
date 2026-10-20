@@ -11,6 +11,8 @@ export default defineConfig(async () => {
           bindings: {
             TEST_MIGRATIONS: migrations,
             HMAC_KEY: "test-hmac-key",
+            BASE_URL: "http://localhost:8787",
+            MAIL_MODE: "log",
             ORGANIZERS: "org@example.org",
             ORCID_CLIENT_ID: "orcid-client",
             ORCID_CLIENT_SECRET: "orcid-secret",

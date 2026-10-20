@@ -2,7 +2,7 @@ export interface Env {
   DB: D1Database;
   SITE_NAME: string;
   BASE_URL: string;
-  ORGANIZERS: string;
+  ORGANIZERS?: string;
   MAIL_MODE: string;
   MAIL_FROM: string;
   ORCID_BASE: string;

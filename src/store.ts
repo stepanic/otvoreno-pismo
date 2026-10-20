@@ -432,7 +432,7 @@ export function counts(sigs: Signature[]) {
 // ---------- organizatori ----------
 
 export function isOrganizerAllowed(env: Env, email: string): boolean {
-  const list = env.ORGANIZERS.split(",").map((e) => normalizeEmail(e)).filter(Boolean);
+  const list = (env.ORGANIZERS ?? "").split(",").map((e) => normalizeEmail(e)).filter(Boolean);
   return list.includes("*") || list.includes(normalizeEmail(email));
 }
 
