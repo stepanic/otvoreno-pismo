@@ -83,6 +83,7 @@ Neobavezno:
 
 - [docs/00-plan.md](docs/00-plan.md) — odluke i faze (sljedeće: anonimnost sa
   Semaphore ZK dokazom, zkPassport/Self, EUDI novčanik)
+- [docs/02-todo.md](docs/02-todo.md) — što fali do pravog lansiranja
 - [docs/research/01-postojece-platforme.md](docs/research/01-postojece-platforme.md)
 - [docs/research/02-verifikacija-identiteta.md](docs/research/02-verifikacija-identiteta.md)
 

@@ -15,9 +15,10 @@
 
 ## Produkcija (20. 10. 2026.)
 - https://openletter.domovina.ai — Worker `otvoreno-pismo` u Cloudflare računu D.O.M., custom domain; D1 `otvoreno-pismo` (eeur), migracija 0001 primijenjena.
-- Tajne: `CERTILIA_CLIENT_ID/SECRET` i `ORCID_CLIENT_ID/SECRET` (ORCID Public API, aplikacija „Otvoreno pismo”) postavljeni 20. 10.; stvarni tok još nije isproban. `HMAC_KEY` (kopija u macOS Keychainu: servis „openletter.domovina.ai HMAC_KEY”; ne mijenjati, inače deduplikacija puca), `RESEND_API_KEY`, `ORGANIZERS`.
+- Tajne: `CERTILIA_CLIENT_ID/SECRET` i `ORCID_CLIENT_ID/SECRET` (ORCID Public API, aplikacija „Otvoreno pismo”) postavljeni 20. 10.; stvarni tok oba providera prošao na `/pismo-test-ms`. `HMAC_KEY` (kopija u macOS Keychainu: servis „openletter.domovina.ai HMAC_KEY”; ne mijenjati, inače deduplikacija puca), `RESEND_API_KEY`, `ORGANIZERS`.
 - Mail: Resend, pošiljatelj `openletter@domovina.ai` (domena domovina.ai verificirana u Resendu); login mail provjereno stigao u Gmail.
-- Provjereno: rute 200/303/404, CSP, CSRF 403. Pisma ni potpisi na produkciji još ne postoje.
+- Provjereno: rute 200/303/404, CSP, CSRF 403. Testno pismo `/pismo-test-ms` (organizator korisnik), 1 potpis razine 3 (e-mail + Certilia + ORCID), `verify-log.mjs` prolazi.
+- Daljnji rad: [02-todo](02-todo.md).
 
 ## Sljedeće
 1. Turnstile (neobavezno).
