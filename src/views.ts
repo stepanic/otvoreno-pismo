@@ -20,7 +20,8 @@ h1{font-size:clamp(26px,4vw,38px);line-height:1.2;margin:28px 0 12px}h2{font-siz
 @media (max-width:860px){.grid{grid-template-columns:1fr}}
 .letter{font-size:18px;max-width:70ch}.letter p{margin:0 0 1em}
 .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px}
-.sticky{position:sticky;top:16px}
+.sticky{position:sticky;top:16px}aside{margin-top:28px}.mobile-only{display:none}
+@media (max-width:860px){.mobile-only{display:inline-block}aside{margin-top:0}}
 label{display:block;font-size:14px;font-weight:600;margin:12px 0 4px}
 input[type=text],input[type=email],textarea,select{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:7px;background:var(--bg);color:var(--fg);font:inherit}
 textarea{min-height:90px}.body-edit{min-height:380px;font-family:ui-monospace,monospace;font-size:14px}
@@ -119,7 +120,7 @@ export function letterPage(
   const form =
     l.status !== "published"
       ? html`<div class="card"><b>${l.status === "closed" ? "Potpisivanje je zatvoreno." : "Pismo još nije objavljeno."}</b></div>`
-      : html`<form class="card sticky" method="post" action="/${l.slug}/potpisi">
+      : html`<form id="potpis" class="card sticky" method="post" action="/${l.slug}/potpisi">
 <h2 style="margin-top:0">Potpiši</h2>
 ${opts.error ? html`<div class="flash err">${opts.error}</div>` : ""}
 <label for="name">Ime i prezime</label><input id="name" name="name" type="text" maxlength="120" value="${f.name ?? ""}" autocomplete="name">
@@ -145,6 +146,7 @@ ${turnstile ? html`<div class="cf-turnstile" data-sitekey="${env.TURNSTILE_SITE_
     html`<div class="grid"><article>
 <h1>${l.title}</h1>
 <p class="muted small">Objavljeno ${fmtDate(l.published_at)}${l.status === "closed" ? html` · zatvoreno ${fmtDate(l.closed_at)}` : ""}</p>
+${l.status === "published" ? html`<p><a class="btn mobile-only" href="#potpis">Potpiši pismo</a></p>` : ""}
 <div class="letter">${raw(renderMarkdown(l.body_md))}</div>
 <h2 id="potpisi">Potpisi</h2>
 <div class="stats"><span><b>${c.total}</b> ukupno</span>${[4, 3, 2, 1].map((t) => html`<span class="t${t}"><b>${c.byTier[String(t)] ?? 0}</b> ${TIER_LABEL[t]?.toLowerCase()}</span>`)}<span><b>${c.anonymous}</b> anonimno</span></div>
@@ -166,7 +168,7 @@ ${s.comment ? html`<br><span class="small">„${s.comment}”</span>` : ""}<br><
   return html`<li><b>${s.title ? `${s.title} ` : ""}${s.name}</b>${badge(s.tier)}
 ${s.orcid ? html` <a class="small" href="https://orcid.org/${s.orcid}" rel="nofollow">ORCID</a>` : ""}
 ${s.affiliation || s.country ? html`<br><span class="small">${[s.affiliation, s.country].filter(Boolean).join(", ")}</span>` : ""}
-${s.institution ? html`<br><span class="small muted">e-mail: ${s.institution}</span>` : ""}
+${s.institution ? html`<br><span class="small muted">domena e-maila: ${s.institution}</span>` : ""}
 ${s.comment ? html`<br><span class="small">„${s.comment}”</span>` : ""}
 <br><span class="small muted">${methods}${s.name_source !== "self" ? ` · ime iz izvora: ${METHOD_LABEL[s.name_source as MethodKind] ?? s.name_source}` : ""}${manual ? ` · ${manual}` : ""}</span></li>`;
 }

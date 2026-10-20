@@ -11,7 +11,8 @@
     "db:migrate:remote": "wrangler d1 migrations apply otvoreno-pismo --remote",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "verify-log": "node scripts/verify-log.mjs"
+    "verify-log": "node scripts/verify-log.mjs",
+    "check": "tsc --noEmit && vitest run"
   },
   "devDependencies": {
     "@cloudflare/vitest-plugin": "^1.4.6",

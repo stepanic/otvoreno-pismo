@@ -122,7 +122,8 @@ route("GET", "/robots.txt", async () => new Response("User-agent: *\nDisallow: /
 
 route("POST", "/:slug/potpisi", async (req, env, p) => {
   const l = await store.letterBySlug(env.DB, p.slug!);
-  if (!l) return v.message(env, "Nema pisma", "Ovo pismo ne postoji.", 404);
+  if (!l || l.status === "draft") return v.message(env, "Nema pisma", "Ovo pismo ne postoji.", 404);
+  if (l.status === "closed") return v.message(env, "Zatvoreno", "Potpisivanje ovog pisma je zatvoreno.", 400);
   const f = await form(req);
   const back = async (error: string) =>
     v.letterPage(env, l, await store.activeSignatures(env.DB, l.id), { filter: 0, error, form: f });
