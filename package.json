@@ -1,0 +1,26 @@
+{
+  "name": "otvoreno-pismo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:migrate:local": "wrangler d1 migrations apply otvoreno-pismo --local",
+    "db:migrate:remote": "wrangler d1 migrations apply otvoreno-pismo --remote",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "verify-log": "node scripts/verify-log.mjs"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-plugin": "^1.4.6",
+    "@cloudflare/workers-types": "^5.20261019.1",
+    "typescript": "^5.9.0",
+    "vitest": "~4.1.0",
+    "wrangler": "^4.151.3"
+  },
+  "dependencies": {
+    "marked": "^16.0.0"
+  }
+}
